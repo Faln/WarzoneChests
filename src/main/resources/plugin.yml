@@ -1,0 +1,7 @@
+name: WarzoneChests
+version: '${project.version}'
+main: me.faln.projects.warzonechests.WarzoneChests
+api-version: 1.16
+authors: [ Faln ]
+softdepend:
+  - WorldGuard

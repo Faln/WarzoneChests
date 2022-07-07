@@ -1,0 +1,16 @@
+#All numbers in Seconds
+spawn-timer:
+  min-delay: 10
+  max-delay: 30
+
+progress-bar:
+  amount-of-bars: 40
+  symbol: '|'
+  primary-color: '&a'
+  secondary-color: '&c'
+
+whitelisted-regions:
+  - 'reward-chest-open-area'
+
+amount-to-spawn: 10
+chest-expire-in: 30

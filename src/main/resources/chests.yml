@@ -1,0 +1,64 @@
+normal-chest:
+  chest-display: '&a&lNormal Chest'
+  name: '&a&lNormal Chest'
+  material: CHEST
+  lore:
+    - '&7Chest lore'
+  min-percentage: 10.0
+  max-percentage: 15.0
+  min-rewards-amount: 1
+  max-rewards-amount: 2
+  chance: 70
+  rewards:
+    '1':
+      type: item
+      chance: 30
+      items:
+        '1':
+          name: '&fDiamond'
+          material: DIAMOND
+          lore:
+            - '&7lore'
+          glow: false
+          enchants: [ ]
+          flags: [ ]
+        '2':
+          name: '&fIron'
+          material: IRON_INGOT
+          lore:
+            - '&7lore'
+          glow: false
+          enchants: [ ]
+          flags: [ ]
+    '2':
+      type: command
+      chance: 70
+      command: 'give %player% diamond 1'
+rare-chest:
+  chest-display: '&a&Rare Chest'
+  name: '&a&Rare Chest'
+  material: CHEST
+  lore:
+    - '&7Chest lore'
+  min-percentage: 15.0
+  max-percentage: 20.0
+  min-rewards-amount: 2
+  max-rewards-amount: 3
+  chance: 30
+  rewards:
+    '1':
+      type: item
+      chance: 90
+      items:
+        '1':
+          name: '&fDiamond'
+          material: DIAMOND
+          lore:
+            - '&7lore'
+          glow: false
+          enchants: [ ]
+          flags: [ ]
+    '2':
+      type: command
+      chance: 10
+      command: 'give %player% diamond 1'
