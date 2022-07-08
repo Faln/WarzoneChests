@@ -31,15 +31,17 @@ public class ChestPlaceListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChestPlace(final BlockPlaceEvent event) {
-        if (event.isCancelled() || event.getHand() != EquipmentSlot.HAND)
+        if (event.isCancelled() || event.getHand() != EquipmentSlot.HAND) {
             return;
+        }
 
         final Block block = event.getBlockPlaced();
         final Player player = event.getPlayer();
         final ItemStack item = event.getItemInHand();
 
-        if (block.getType() == Material.AIR || !Utils.hasStringData(item))
+        if (block.getType() == Material.AIR || !Utils.hasStringData(item)) {
             return;
+        }
 
         event.setCancelled(true);
 
@@ -68,13 +70,15 @@ public class ChestPlaceListener implements Listener {
         final RegionManager manager = container.get(BukkitAdapter.adapt(player.getWorld()));
         final ApplicableRegionSet set = container.createQuery().getApplicableRegions(BukkitAdapter.adapt(player.getLocation()));
 
-        if (manager == null)
+        if (manager == null) {
             return false;
+        }
 
         for (String whitelistedRegions : plugin.getLocationCache().getWhitelistedRegions()) {
             ProtectedRegion region = manager.getRegion(whitelistedRegions);
-            if (region != null && set.getRegions().contains(region))
+            if (region != null && set.getRegions().contains(region)) {
                 return true;
+            }
         }
 
         return false;

@@ -12,6 +12,7 @@ next-spawn: '&a&l[!] &aThe next warzone envoy will spawn in %time%.'
 reload-success: '&a&l[!] &aSuccessfully reloaded the plugin.'
 added-location: '&a&l[!] &aAdded location to potential spawns.'
 action-bar: '&a%amount-gained% &8| &eChest Progress: %percentage% &8| %progress-bar%'
+already-in-progress: '&c&l[!] &cA warzone envoy is already in progress.'
 chest-spawning:
   - ''
   - '       &a&lWarZone Chests'

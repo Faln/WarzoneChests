@@ -1,13 +1,12 @@
 package me.faln.projects.warzonechests;
 
 import co.aikar.commands.PaperCommandManager;
-import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import me.faln.projects.warzonechests.cache.ChestCache;
 import me.faln.projects.warzonechests.cache.ClickCache;
 import me.faln.projects.warzonechests.cache.ConfigCache;
 import me.faln.projects.warzonechests.cache.LocationCache;
-import me.faln.projects.warzonechests.commands.WChestCmd;
+import me.faln.projects.warzonechests.commands.ChestCmds;
 import me.faln.projects.warzonechests.listeners.ChestOpenListener;
 import me.faln.projects.warzonechests.listeners.ChestPlaceListener;
 import me.faln.projects.warzonechests.managers.FilesManager;
@@ -48,7 +47,7 @@ public final class WarzoneChests extends JavaPlugin {
     public void reload() {
 
         this.paperCommandManager = new PaperCommandManager(this);
-        this.paperCommandManager.registerCommand(new WChestCmd(this));
+        this.paperCommandManager.registerCommand(new ChestCmds(this));
         this.paperCommandManager.getCommandCompletions().registerAsyncCompletion("chests", context -> this.chestCache.getChests().keySet());
 
         this.files = new FilesManager(this);

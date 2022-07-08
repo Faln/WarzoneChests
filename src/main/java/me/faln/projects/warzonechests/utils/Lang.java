@@ -13,6 +13,7 @@ public enum Lang {
     RELOAD_SUCCESS("reload-success"),
     ADDED_LOCATION("added-location"),
     ACTION_BAR("action-bar"),
+    ALREADY_IN_PROGRESS("already-in-progress"),
     CHEST_SPAWNING("chest-spawning");
 
     private final WarzoneChests plugin = WarzoneChests.getPlugin(WarzoneChests.class);

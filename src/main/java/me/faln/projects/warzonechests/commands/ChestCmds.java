@@ -18,11 +18,11 @@ import java.util.List;
 
 @CommandAlias("chest|treasurechest|tc|chests")
 @CommandPermission("warzonechests.use")
-public class WChestCmd extends BaseCommand {
+public class ChestCmds extends BaseCommand {
 
     private final WarzoneChests plugin;
 
-    public WChestCmd(WarzoneChests plugin) {
+    public ChestCmds(WarzoneChests plugin) {
         this.plugin = plugin;
     }
 
@@ -60,16 +60,18 @@ public class WChestCmd extends BaseCommand {
     }
 
     @Subcommand("addlocation")
-    public void addLocation(CommandSender sender) {
-        if (!(sender instanceof Player))
+    public void addLocationCommand(CommandSender sender) {
+        if (!(sender instanceof Player)) {
             return;
+        }
 
         final Player player = (Player) sender;
         final Location location = player.getLocation();
         final List<Location> locationList = plugin.getLocationCache().getLocations();
 
-        if (locationList.contains(location))
+        if (locationList.contains(location)) {
             return;
+        }
 
         locationList.add(location);
 
@@ -78,8 +80,9 @@ public class WChestCmd extends BaseCommand {
         player.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             List<String> list = new ArrayList<>();
             for (Location locInList : locationList) {
-                if (location.getWorld() == null)
+                if (location.getWorld() == null) {
                     continue;
+                }
 
                 final String loc = locInList.getWorld().getName() + ":" +
                         locInList.getBlockX() + ":" +
@@ -90,7 +93,15 @@ public class WChestCmd extends BaseCommand {
             }
             plugin.getFiles().getFile("data").getConfig().set("locations", list);
         });
+    }
 
+    @Subcommand("forcespawn")
+    public void forceSpawnCommand(CommandSender sender) {
+        if (plugin.getSpawningTask().isInAction()) {
+            sender.sendMessage(Lang.ALREADY_IN_PROGRESS.getMessage());
+            return;
+        }
+        plugin.getSpawningTask().setForced(true);
     }
 
 

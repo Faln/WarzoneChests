@@ -33,8 +33,9 @@ public class Utils {
     }
 
     public static boolean addStringData(final Block block, final String value) {
-        if (!(block.getState() instanceof TileState))
+        if (!(block.getState() instanceof TileState)) {
             return false;
+        }
         TileState state = (TileState) block.getState();
         state.getPersistentDataContainer().set(key, PersistentDataType.STRING, value);
         state.update();
@@ -42,27 +43,31 @@ public class Utils {
     }
 
     public static String getStringData(final Block block) {
-        if (!(block.getState() instanceof TileState))
+        if (!(block.getState() instanceof TileState)) {
             return null;
+        }
 
         TileState state = (TileState) block.getState();
 
-        if (!state.getPersistentDataContainer().has(key, PersistentDataType.STRING))
+        if (!state.getPersistentDataContainer().has(key, PersistentDataType.STRING)) {
             return null;
+        }
 
         return state.getPersistentDataContainer().get(key, PersistentDataType.STRING);
     }
 
     public static String getStringData(final ItemStack item) {
-        if (item == null || item.getType() == Material.AIR || !item.hasItemMeta() || item.getItemMeta() == null)
+        if (item == null || item.getType() == Material.AIR || !item.hasItemMeta() || item.getItemMeta() == null) {
             return null;
+        }
 
         return item.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING);
     }
 
     public static boolean hasStringData(final Block block) {
-        if (!(block.getState() instanceof TileState))
+        if (!(block.getState() instanceof TileState)) {
             return false;
+        }
 
         TileState state = (TileState) block.getState();
 
@@ -70,8 +75,9 @@ public class Utils {
     }
 
     public static boolean hasStringData(final ItemStack item) {
-        if (item == null || item.getType() == Material.AIR || !item.hasItemMeta() || item.getItemMeta() == null)
+        if (item == null || item.getType() == Material.AIR || !item.hasItemMeta() || item.getItemMeta() == null) {
             return false;
+        }
 
         return item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.STRING);
     }

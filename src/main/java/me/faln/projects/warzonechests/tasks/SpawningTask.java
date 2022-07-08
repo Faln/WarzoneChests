@@ -1,6 +1,7 @@
 package me.faln.projects.warzonechests.tasks;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.faln.projects.warzonechests.WarzoneChests;
 import me.faln.projects.warzonechests.cache.ConfigCache;
 import me.faln.projects.warzonechests.utils.Lang;
@@ -15,13 +16,14 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-@Getter
+@Getter @Setter
 public class SpawningTask {
 
     private final WarzoneChests plugin;
 
     private int nextSpawn = 0;
     private boolean inAction = false;
+    private boolean forced = false;
     private Set<Location> locations;
     private final ConfigCache cache;
 
@@ -31,18 +33,21 @@ public class SpawningTask {
         this.run();
     }
 
-    public void run() {
+    private void run() {
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (!inAction) {
+
+                    nextSpawn = forced ? 1 : ThreadLocalRandom.current().nextInt(cache.getMinDelay(), cache.getMaxDelay());
                     inAction = true;
-                    nextSpawn = ThreadLocalRandom.current().nextInt(cache.getMinDelay(), cache.getMaxDelay());
+                    forced = false;
 
                     new BukkitRunnable() {
                         @Override
                         public void run() {
                             int amountToSpawn = Math.min(cache.getAmountToSpawn(), plugin.getLocationCache().getLocations().size());
+
                             locations = plugin.getLocationCache().getLocations().stream().limit(amountToSpawn).collect(Collectors.toSet());
 
                             for (Location location : locations) {
@@ -73,7 +78,7 @@ public class SpawningTask {
                     location.getBlock().setType(Material.AIR);
                 }
             }
-        }.runTaskLater(plugin, delay * 20L);
+        }.runTaskLater(plugin, (delay + nextSpawn) * 20L);
     }
 
 }

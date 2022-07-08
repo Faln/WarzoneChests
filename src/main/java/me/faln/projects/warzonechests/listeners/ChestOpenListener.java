@@ -37,8 +37,9 @@ public class ChestOpenListener implements Listener {
 
         final Block block = event.getClickedBlock();
 
-        if (!Utils.hasStringData(block))
+        if (!Utils.hasStringData(block)) {
             return;
+        }
 
         event.setCancelled(true);
 

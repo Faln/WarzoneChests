@@ -34,25 +34,29 @@ public class ChestCache {
         this.chestPool.clear();
 
         ConfigurationSection section = plugin.getFiles().getFile("chests").section("");
-        if (section == null)
+        if (section == null) {
             return;
+        }
 
         for (String chest : section.getKeys(false)) {
 
             ConfigurationSection chestSection = section.getConfigurationSection(chest);
-            if (chestSection == null)
+            if (chestSection == null) {
                 return;
+            }
             ConfigurationSection rewardsSection = section.getConfigurationSection(chest + ".rewards");
-            if (rewardsSection == null)
+            if (rewardsSection == null) {
                 return;
+            }
 
             List<Reward> rewards = new ArrayList<>();
 
             for (String rewardID : rewardsSection.getKeys(false)) {
 
                 final String rewardType = rewardsSection.getString(rewardID + ".type", null);
-                if (rewardType == null || rewardType.equalsIgnoreCase(""))
+                if (rewardType == null || rewardType.equalsIgnoreCase("")) {
                     continue;
+                }
 
                 if (rewardType.equalsIgnoreCase("item")) {
                     for (String item : rewardsSection.getConfigurationSection(rewardID + ".items").getKeys(false)) {
